@@ -30970,7 +30970,7 @@ const {
 const run = async () => {
 	// Reuse octokit for each repo
 	const git = new Git()
-
+	core.info(`Parse Config`)
 	const repos = await parseConfig()
 
 	const prUrls = []
