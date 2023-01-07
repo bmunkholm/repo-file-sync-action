@@ -28,7 +28,7 @@ const run = async () => {
 	core.info(`Parse Config`)
 	try { 
 		const repos = await parseConfig()
-		core.info(`Found ${ repos.length } repository(ies) to sync`)
+		core.info(`Found ${ repos.length } repository(ies) to sync` + JSON.stringify(repos, null, 2))
 	} catch (error) {
 		core.error(error)
 		core.setFailed(error.message)

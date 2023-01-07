@@ -214,7 +214,7 @@ const parseConfig = async () => {
 			const groups = Array.isArray(rawObject) ? rawObject : [ rawObject ]
 
 			groups.forEach((group) => {
-				core.warning('group ${ group }' + JSON.stringify({ group }))
+				core.warning(JSON.stringify({ group }))
 				const repos = typeof group.repos === 'string' ? group.repos.split('\n').map((n) => n.trim()).filter((n) => n) : group.repos
 
 				repos.forEach((name) => {
