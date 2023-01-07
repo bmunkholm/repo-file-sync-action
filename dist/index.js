@@ -30000,6 +30000,7 @@ const parseConfig = async () => {
 			const groups = Array.isArray(rawObject) ? rawObject : [ rawObject ]
 
 			groups.forEach((group) => {
+				core.warning('group ${ group }')
 				const repos = typeof group.repos === 'string' ? group.repos.split('\n').map((n) => n.trim()).filter((n) => n) : group.repos
 
 				repos.forEach((name) => {
@@ -30971,8 +30972,13 @@ const run = async () => {
 	// Reuse octokit for each repo
 	const git = new Git()
 	core.info(`Parse Config`)
-	const repos = await parseConfig()
-
+	try { 
+		const repos = await parseConfig()
+		core.info(`Found ${ repos.length } repository(ies) to sync`)
+	} catch (error) {
+		core.error(error)
+		core.setFailed(error.message)
+	}
 	const prUrls = []
 
 	await forEach(repos, async (item) => {

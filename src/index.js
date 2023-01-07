@@ -26,8 +26,13 @@ const run = async () => {
 	// Reuse octokit for each repo
 	const git = new Git()
 	core.info(`Parse Config`)
-	const repos = await parseConfig()
-
+	try { 
+		const repos = await parseConfig()
+		core.info(`Found ${ repos.length } repository(ies) to sync`)
+	} catch (error) {
+		core.error(error)
+		core.setFailed(error.message)
+	}
 	const prUrls = []
 
 	await forEach(repos, async (item) => {
