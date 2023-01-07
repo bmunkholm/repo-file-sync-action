@@ -28,7 +28,7 @@ const run = async () => {
 	core.info(`Parse Config`)
 	 
 	const repos = await parseConfig()
-	core.info(`Found ${ repos.length } repository(ies) to sync` + JSON.stringify(repos, null, 2))
+	core.info(`Found ${ repos.length } repository(ies) to sync1` + JSON.stringify(repos, null, 2))
 	const prUrls = []
 
 	await forEach(repos, async (item) => {
