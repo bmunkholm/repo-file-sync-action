@@ -29944,10 +29944,13 @@ const parseRepoName = (fullRepo) => {
 		core.info('Using custom host')
 	}
 
+	core.debug('Parsing repo name: ' + fullRepo)
 	const user = fullRepo.split('/')[0]
+	core.debug('Parsed repo name: ' + JSON.stringify({ user }))
 	const name = fullRepo.split('/')[1].split('@')[0]
+	core.debug('Parsed repo name: ' + JSON.stringify({ name }))
 	const branch = fullRepo.split('@')[1] || 'default'
-
+	core.debug('Parsed repo name: ' + JSON.stringify({ branch }))
 	return {
 		fullName: `${ host }/${ user }/${ name }`,
 		uniqueName: `${ host }/${ user }/${ name }@${ branch }`,
@@ -30000,7 +30003,7 @@ const parseConfig = async () => {
 			const groups = Array.isArray(rawObject) ? rawObject : [ rawObject ]
 
 			groups.forEach((group) => {
-				core.warning('group ${ group }')
+				core.warning('group ${ group }' + JSON.stringify({ group }))
 				const repos = typeof group.repos === 'string' ? group.repos.split('\n').map((n) => n.trim()).filter((n) => n) : group.repos
 
 				repos.forEach((name) => {
